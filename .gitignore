@@ -49,3 +49,6 @@ next-env.d.ts
 # Cache
 .cache/
 .swc/
+
+package-lock.json
+yarn.lock
