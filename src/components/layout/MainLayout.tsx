@@ -1,9 +1,14 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
+
+const DemoEnvironmentBanner = dynamic(() => import('./DemoEnvironmentBanner'), {
+  ssr: false,
+});
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -13,6 +18,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <DemoEnvironmentBanner />
       <div className="flex flex-1">
         <Sidebar />
         <main className="flex-1 p-6 bg-gray-50">

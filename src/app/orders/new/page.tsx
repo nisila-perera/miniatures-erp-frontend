@@ -392,7 +392,7 @@ function OrderItemRow({
           {item.discount_type && (
             <>
               <Input
-                label={item.discount_type === DiscountType.PERCENTAGE ? 'Discount (%)' : 'Discount ($)'}
+                label={item.discount_type === DiscountType.PERCENTAGE ? 'Discount (%)' : 'Discount (LKR)'}
                 type="number"
                 min={0}
                 step={item.discount_type === DiscountType.PERCENTAGE ? 1 : 0.01}
@@ -416,7 +416,7 @@ function OrderItemRow({
         <div className="text-right">
           <span className="text-sm text-gray-500">Item Total: </span>
           <span className="text-lg font-semibold" style={{ color: BRAND_COLORS.primary }}>
-            ${calculateItemTotal().toFixed(2)}
+            LKR {calculateItemTotal().toFixed(2)}
           </span>
         </div>
       </div>
@@ -748,7 +748,7 @@ export default function NewOrderPage() {
             {form.discount_type && (
               <>
                 <Input
-                  label={form.discount_type === DiscountType.PERCENTAGE ? 'Discount (%)' : 'Discount ($)'}
+                  label={form.discount_type === DiscountType.PERCENTAGE ? 'Discount (%)' : 'Discount (LKR)'}
                   type="number"
                   min={0}
                   step={form.discount_type === DiscountType.PERCENTAGE ? 1 : 0.01}
@@ -775,7 +775,7 @@ export default function NewOrderPage() {
           <div className="space-y-3">
             <div className="flex justify-between text-gray-600">
               <span>Subtotal ({form.items.length} items)</span>
-              <span>${calculateSubtotal().toFixed(2)}</span>
+              <span>LKR {calculateSubtotal().toFixed(2)}</span>
             </div>
             {form.discount_type && form.discount_amount > 0 && (
               <div className="flex justify-between text-red-600">
@@ -790,7 +790,7 @@ export default function NewOrderPage() {
             )}
             <div className="flex justify-between text-xl font-bold pt-3 border-t border-gray-200">
               <span style={{ color: BRAND_COLORS.dark }}>Total</span>
-              <span style={{ color: BRAND_COLORS.primary }}>${calculateTotal().toFixed(2)}</span>
+              <span style={{ color: BRAND_COLORS.primary }}>LKR {calculateTotal().toFixed(2)}</span>
             </div>
           </div>
         </Card>

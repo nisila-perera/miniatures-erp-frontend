@@ -40,3 +40,23 @@
     @apply block text-sm font-medium text-brand-dark mb-1;
   }
 }
+
+@keyframes demo-banner-scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.demo-banner-marquee {
+  display: inline-block;
+  animation: demo-banner-scroll 18s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-banner-marquee {
+    animation: none;
+  }
+}
