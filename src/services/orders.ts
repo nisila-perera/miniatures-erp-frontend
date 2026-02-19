@@ -1,5 +1,5 @@
 import apiClient from './api';
-import { Order, OrderPainter, OrderItem } from '@/types/order';
+import { Order, OrderPainter } from '@/types/order';
 import { Payment } from '@/types/payment';
 import { OrderSource, OrderStatus, DiscountType } from '@/types';
 

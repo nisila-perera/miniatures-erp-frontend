@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { MainLayout } from '@/components/layout';
 import { Card, Button, Input, Select } from '@/components/ui';
 import { BRAND_COLORS } from '@/config/brand';
@@ -353,12 +354,15 @@ function OrderItemRow({
             Product Image (PNG or JPG)
           </label>
           <div className="flex items-center gap-4">
-            <label className="flex items-center justify-center w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition-colors">
+            <label className="relative flex items-center justify-center w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition-colors">
               {item.image_url ? (
-                <img 
-                  src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${item.image_url}`} 
-                  alt="Product" 
-                  className="w-full h-full object-cover rounded-lg"
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${item.image_url}`}
+                  alt="Product"
+                  fill
+                  sizes="128px"
+                  unoptimized
+                  className="object-cover rounded-lg"
                 />
               ) : (
                 <div className="text-center text-gray-400">
@@ -714,7 +718,7 @@ export default function NewOrderPage() {
 
           {form.items.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
-              No items added. Click "Add Item" to start.
+              No items added. Click Add Item to start.
             </div>
           ) : (
             form.items.map((item, index) => (

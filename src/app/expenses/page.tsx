@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MainLayout } from '@/components/layout';
 import { Card, Button, Badge } from '@/components/ui';
@@ -178,7 +178,7 @@ export default function ExpensesPage() {
   const [endDate, setEndDate] = useState('');
   const [showFilters, setShowFilters] = useState(false);
 
-  const loadExpenses = async () => {
+  const loadExpenses = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -193,11 +193,11 @@ export default function ExpensesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedCategory, startDate, endDate]);
 
   useEffect(() => {
     loadExpenses();
-  }, [selectedCategory, startDate, endDate]);
+  }, [loadExpenses]);
 
   const handleDelete = async () => {
     if (!deleteTarget) return;

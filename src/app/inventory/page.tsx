@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MainLayout } from '@/components/layout';
-import { Card, Button, Badge } from '@/components/ui';
+import { Card, Button } from '@/components/ui';
 import { BRAND_COLORS } from '@/config/brand';
 import { Resin, PaintBottle } from '@/types/inventory';
 import { fetchResin, fetchPaintBottles, deleteResin, deletePaintBottle } from '@/services/inventory';

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, Button } from '@/components/ui';
 import { BRAND_COLORS } from '@/config/brand';
 import { DateRangeFilter, SalesReportResponse } from '@/types/report';
@@ -23,7 +23,7 @@ export default function SalesReport() {
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<SalesReportResponse | null>(null);
 
-  const loadReport = async () => {
+  const loadReport = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -40,11 +40,11 @@ export default function SalesReport() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [dateRange, startDate, endDate, groupByCategory, groupByPaymentMethod]);
 
   useEffect(() => {
     loadReport();
-  }, [dateRange, startDate, endDate, groupByCategory, groupByPaymentMethod]);
+  }, [loadReport]);
 
   const exportToCSV = () => {
     if (!report) return;

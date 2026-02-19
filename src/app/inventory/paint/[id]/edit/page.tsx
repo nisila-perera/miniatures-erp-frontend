@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { MainLayout } from '@/components/layout';
 import { Card, Button, Input } from '@/components/ui';
 import { BRAND_COLORS } from '@/config/brand';
-import { PaintBottle } from '@/types/inventory';
 import { fetchPaintBottleById, updatePaintBottle } from '@/services/inventory';
 
 // Back arrow icon

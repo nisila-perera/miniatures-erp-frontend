@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { MainLayout } from '@/components/layout';
 import { Card, Button } from '@/components/ui';
 import { BRAND_COLORS } from '@/config/brand';
-import { DateRangeFilter } from '@/types/report';
 import SalesReport from './components/SalesReport';
 import ProfitLossReport from './components/ProfitLossReport';
 import MaterialUsageReport from './components/MaterialUsageReport';

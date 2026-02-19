@@ -16,6 +16,10 @@ export interface SyncHistoryItem {
   message: string;
 }
 
+interface StoredSyncHistoryItem extends Omit<SyncHistoryItem, 'timestamp'> {
+  timestamp: string;
+}
+
 /**
  * Sync customers from WooCommerce
  */
@@ -65,8 +69,12 @@ export function getSyncHistory(): SyncHistoryItem[] {
   if (!history) return [];
   
   try {
-    const parsed = JSON.parse(history);
-    return parsed.map((item: any) => ({
+    const parsed = JSON.parse(history) as StoredSyncHistoryItem[];
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed.map((item) => ({
       ...item,
       timestamp: new Date(item.timestamp)
     }));

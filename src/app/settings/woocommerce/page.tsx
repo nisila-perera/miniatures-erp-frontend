@@ -49,7 +49,6 @@ export default function WooCommerceSettingsPage() {
   const [testing, setTesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [testResult, setTestResult] = useState<'success' | 'error' | null>(null);
   const [showSecrets, setShowSecrets] = useState(false);
 
   useEffect(() => {
@@ -66,7 +65,7 @@ export default function WooCommerceSettingsPage() {
         consumer_key: '',
         consumer_secret: ''
       });
-    } catch (err) {
+    } catch {
       setError('Failed to load configuration');
     } finally {
       setLoading(false);
@@ -94,7 +93,6 @@ export default function WooCommerceSettingsPage() {
   const handleTestConnection = async () => {
     setError(null);
     setSuccess(null);
-    setTestResult(null);
     setTesting(true);
 
     try {
@@ -103,14 +101,11 @@ export default function WooCommerceSettingsPage() {
       
       // Simulate success if all fields are filled
       if (config.url && config.consumer_key && config.consumer_secret) {
-        setTestResult('success');
         setSuccess('Connection test successful!');
       } else {
-        setTestResult('error');
         setError('Please fill in all fields before testing');
       }
-    } catch (err) {
-      setTestResult('error');
+    } catch {
       setError('Connection test failed. Please check your credentials.');
     } finally {
       setTesting(false);

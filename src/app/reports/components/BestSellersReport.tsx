@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, Button } from '@/components/ui';
 import { BRAND_COLORS } from '@/config/brand';
 import { DateRangeFilter, BestSellersResponse } from '@/types/report';
@@ -25,20 +25,20 @@ export default function BestSellersReport() {
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<BestSellersResponse | null>(null);
 
-  useEffect(() => {
-    loadCategories();
-  }, []);
-
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       const data = await fetchProductCategories();
       setCategories(data);
     } catch (err) {
       console.error('Failed to load categories:', err);
     }
-  };
+  }, []);
 
-  const loadReport = async () => {
+  useEffect(() => {
+    loadCategories();
+  }, [loadCategories]);
+
+  const loadReport = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -54,11 +54,11 @@ export default function BestSellersReport() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [dateRange, startDate, endDate, categoryId]);
 
   useEffect(() => {
     loadReport();
-  }, [dateRange, startDate, endDate, categoryId]);
+  }, [loadReport]);
 
   const exportToCSV = () => {
     if (!report) return;

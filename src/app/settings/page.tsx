@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { MainLayout } from '@/components/layout';
-import { Card, Button } from '@/components/ui';
+import { Card } from '@/components/ui';
 import { BRAND_COLORS } from '@/config/brand';
 
 // Icons

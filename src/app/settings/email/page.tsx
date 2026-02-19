@@ -57,7 +57,6 @@ export default function EmailSettingsPage() {
   const [testing, setTesting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [testResult, setTestResult] = useState<'success' | 'error' | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [testEmail, setTestEmail] = useState('');
 
@@ -79,7 +78,7 @@ export default function EmailSettingsPage() {
         smtp_from_name: 'Miniatures.lk',
         use_tls: true
       });
-    } catch (err) {
+    } catch {
       setError('Failed to load configuration');
     } finally {
       setLoading(false);
@@ -112,7 +111,6 @@ export default function EmailSettingsPage() {
 
     setError(null);
     setSuccess(null);
-    setTestResult(null);
     setTesting(true);
 
     try {
@@ -121,14 +119,11 @@ export default function EmailSettingsPage() {
       
       // Simulate success if all fields are filled
       if (config.smtp_host && config.smtp_user && config.smtp_password && config.smtp_from) {
-        setTestResult('success');
         setSuccess(`Test email sent successfully to ${testEmail}`);
       } else {
-        setTestResult('error');
         setError('Please fill in all SMTP fields before testing');
       }
-    } catch (err) {
-      setTestResult('error');
+    } catch {
       setError('Failed to send test email. Please check your SMTP configuration.');
     } finally {
       setTesting(false);
